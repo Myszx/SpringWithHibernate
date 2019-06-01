@@ -1,10 +1,7 @@
 package com.user.userservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,8 +9,12 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserRestController {
 
+    private UsersRepository usersRepository;
+
     @Autowired
-    UsersRepository usersRepository;
+    public UserRestController(UsersRepository usersRepository){
+        this.usersRepository = usersRepository;
+    }
 
     @GetMapping("/all")
     public List<User> getAllusers(){
@@ -22,7 +23,17 @@ public class UserRestController {
 
     @GetMapping("/all/{id}")
     public User getUserById(@PathVariable(value = "id") Long id){
-        return usersRepository.findFirstByIdById(id);
+        return usersRepository.findFirstById(id);
     }
+
+    @PostMapping("/add")
+    public List<User> addUser(@RequestBody User user){
+
+        usersRepository.save(user);
+
+        return usersRepository.findAll();
+    }
+
+
 
 }

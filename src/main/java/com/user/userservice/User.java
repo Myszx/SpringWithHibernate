@@ -1,6 +1,9 @@
 package com.user.userservice;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -28,13 +31,17 @@ public class User {
         this.login = login;
         this.password = password;
         this.age = age;
-        this.date = LocalDate.now();
+    }
+
+    public User(){
+        date = LocalDate.now();
     }
 
     public long getId() {
         return id;
     }
 
+    @JsonIgnore
     public void setId(long id) {
         this.id = id;
     }
@@ -46,7 +53,7 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
-
+    
     public String getPassword() {
         return password;
     }
@@ -59,6 +66,7 @@ public class User {
         return date;
     }
 
+    @JsonIgnore
     public void setDate(LocalDate date) {
         this.date = date;
     }
