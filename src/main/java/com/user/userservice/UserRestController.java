@@ -21,7 +21,7 @@ public class UserRestController {
         return usersRepository.findAll();
     }
 
-    @GetMapping("/all/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable(value = "id") Long id){
         return usersRepository.findFirstById(id);
     }
@@ -29,7 +29,12 @@ public class UserRestController {
     @PostMapping("/add")
     public List<User> addUser(@RequestBody User user){
 
-        usersRepository.save(user);
+        if(null == user.getLogin() || null == user.getPassword()){
+            return usersRepository.findAll();
+        }
+        else {
+            usersRepository.save(user);
+        }
 
         return usersRepository.findAll();
     }

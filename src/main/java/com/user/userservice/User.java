@@ -41,7 +41,6 @@ public class User {
         return id;
     }
 
-    @JsonIgnore
     public void setId(long id) {
         this.id = id;
     }
@@ -53,7 +52,7 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -66,7 +65,6 @@ public class User {
         return date;
     }
 
-    @JsonIgnore
     public void setDate(LocalDate date) {
         this.date = date;
     }
